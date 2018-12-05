@@ -4,6 +4,9 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
+
 public class App {
     public static void main(String[] args) throws Exception{
         String port = System.getenv("PORT") != null ? System.getenv("PORT") : "8080";
@@ -21,6 +24,7 @@ public class App {
         //TODO
         servletHolder.setInitOrder(1);
         context.addServlet(servletHolder, "/*");
+        context.addFilter(LimitFilter.class,"/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
         server.start();
         server.join();
 
