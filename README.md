@@ -21,6 +21,7 @@ Homework Java with Jersey and Jetty
         "created_by" : "username"
       }
 - Get node with id
+
   Method: GET
   URL: api/note?id=
 - Get all notes
