@@ -1,7 +1,7 @@
 # JavaJetty_Jersey
 Homework Java with Jersey and Jetty
 
-#Note DTO
+# Note DTO
 - String id;
 - String content;
 - long created_date;
@@ -9,7 +9,7 @@ Homework Java with Jersey and Jetty
 - Long lastupdated_date;
 - String lastupdated_by;
 
-#API USE
+# API USE
 - Create new Note with data
 
   Method : POST.
