@@ -13,7 +13,7 @@ public class Controller {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Response forFun() {
-        return Response.ok("You are here!!!!", MediaType.TEXT_PLAIN).build();
+        return Response.ok("You are here!!!! \n Create note /api/add \n Get note with id api/note?id=1 \n Get all notes api/all \n Search note with /api/search \n Update Note api/update/{id} \n Delete note at id api/delete/{id}", MediaType.TEXT_PLAIN).build();
     }
     //Create note /api/add
     @POST
@@ -56,7 +56,7 @@ public class Controller {
         return Response.ok(new Gson().toJson(Notes), MediaType.APPLICATION_JSON).build();
     }
 
-    //Search note with query para @GET
+    //Search note with /api/search
     @Path("/api/search")
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchNotesByCreatedBy(
@@ -79,7 +79,7 @@ public class Controller {
         else
             return Response.status(Response.Status.NOT_FOUND).entity("No result").build();
     }
-    //Update Noto api/update/{}
+    //Update Note api/update/{id}
     @PUT
     @Path("/api/update{id}")
     @Consumes(MediaType.APPLICATION_JSON)
