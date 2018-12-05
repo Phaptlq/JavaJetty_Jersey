@@ -6,7 +6,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 public class App {
     public static void main(String[] args) throws Exception{
-        Server server = new Server(8080);
+        String port = System.getenv("PORT") != null ? System.getenv("PORT") : "8080";
+        Server server = new Server(Integer.parseInt(port));
         ServletContextHandler context =
                 new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
         ServletHolder servletHolder =
