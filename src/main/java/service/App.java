@@ -25,14 +25,18 @@ public class App {
                 "service");
         //TODO
         final EnumSet<DispatcherType> REQUEST_SCOPE = EnumSet.of(DispatcherType.REQUEST);
-        // For limit
+        // Rate Limiting Filter
         FilterHolder filterHolder = new FilterHolder( DoSFilter.class );
+        
+        // The DoSFilter init parameter names and meanings are documented here:
+        // http://www.eclipse.org/jetty/documentation/9.1.3.v20140225/dos-filter.html
         filterHolder.setInitParameter("maxRequestsPerSec", "1");  // max requests per second per client
         filterHolder.setInitParameter("delayMs", "-1");           // millisec to delay excess requests. -1 means reject (for testing)
         filterHolder.setInitParameter("remotePort", "false");     // true = track connections by remote ip+port
         filterHolder.setInitParameter("enabled", "true");
-        filterHolder.setInitParameter("trackSessions", "true");
-        //context.addFilter( filterHolder, "/*", REQUEST_SCOPE );
+        filterHolder.setInitParameter("trackSessions", "true");   // track sessions? Probably not useful for a web service.
+
+        context.addFilter( filterHolder, "/*", REQUEST_SCOPE );
         servletHolder.setInitOrder(1);
         context.addServlet(servletHolder, "/*");
         context.addFilter( LimitFilter.class, "/*", REQUEST_SCOPE );

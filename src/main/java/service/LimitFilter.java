@@ -1,35 +1,33 @@
 package service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class LimitFilter implements javax.servlet.Filter {
-    private int limit = 5;
-    private int count;
-    private Object lock = new Object();
+    private static Logger logger;
+    private static Marker marker;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        logger = LoggerFactory.getLogger(this.getClass().getSimpleName() );
+        marker = MarkerFactory.getMarker("");
     }
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        try {
-            boolean ok;
-            synchronized (lock) {
-                ok = count++ < limit;
-            }
-            if (ok) {
-                // let the request through and process as usual
-//                filterChain.doFilter(servletRequest, servletResponse);
-            } else {
-                // handle limit case, e.g. return status code 429 (Too Many Requests)
-                // see http://tools.ietf.org/html/rfc6585#page-3
-                System.out.println("Code 429");
-            }
-        } finally {
-            synchronized (lock) {
-                count--;
-            }
+        if (servletRequest instanceof HttpServletRequest) {
+            HttpServletRequest request = (HttpServletRequest) servletRequest;
+            logger.info( marker, String.format("From %s:%d  %s %s",
+                    request.getRemoteAddr(), request.getRemotePort(), request.getMethod(), request.getRequestURI()
+                    )
+            );
         }
+        // pass request to next filter in chain
+        filterChain.doFilter(servletRequest, servletResponse);
     }
     @Override
     public void destroy() {
