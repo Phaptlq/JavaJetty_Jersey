@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-@Path("/api")
+@Path("/")
 public class Controller {
     static List<NoteDTO> Notes = new ArrayList<NoteDTO>();
 
@@ -17,7 +17,7 @@ public class Controller {
     }
     //Create note /api/add
     @POST
-    @Path("/add")
+    @Path("/api/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createNote(String body) {
@@ -34,7 +34,7 @@ public class Controller {
     }
     //Get note with id api/note?id=1
     @GET
-    @Path("/note")
+    @Path("/api/note")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNoteById(@QueryParam("id") String id) {
         if(id == null || id.trim().length() == 0) {
@@ -49,7 +49,7 @@ public class Controller {
     }
     //Get all notes api/all
     @GET
-    @Path("/all")
+    @Path("/api/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNoteList() {
         System.out.println("All Notes");
@@ -57,7 +57,7 @@ public class Controller {
     }
 
     //Search note with query para @GET
-    @Path("/search")
+    @Path("/api/search")
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchNotesByCreatedBy(
             @DefaultValue("")   @QueryParam("created_by")   String user,
@@ -81,7 +81,7 @@ public class Controller {
     }
     //Update Noto api/update/{}
     @PUT
-    @Path("/update{id}")
+    @Path("/api/update{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateNote(@PathParam("id") String id, String body) {
@@ -106,7 +106,7 @@ public class Controller {
     }
     //Delete note at id api/delete/{id}
     @DELETE
-    @Path("/delete/{id}")
+    @Path("/api/delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteNote(@PathParam("id") String id) {
         if(id == null || id.trim().length() == 0) {
