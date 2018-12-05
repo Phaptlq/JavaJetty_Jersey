@@ -19,7 +19,7 @@ public class LimitFilter implements javax.servlet.Filter {
             }
             if (ok) {
                 // let the request through and process as usual
-                filterChain.doFilter(servletRequest, servletResponse);
+//                filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 // handle limit case, e.g. return status code 429 (Too Many Requests)
                 // see http://tools.ietf.org/html/rfc6585#page-3
