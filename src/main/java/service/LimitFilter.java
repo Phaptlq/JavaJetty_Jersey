@@ -23,7 +23,7 @@ public class LimitFilter implements javax.servlet.Filter {
             } else {
                 // handle limit case, e.g. return status code 429 (Too Many Requests)
                 // see http://tools.ietf.org/html/rfc6585#page-3
-                s
+                System.out.println("Code 429");
             }
         } finally {
             synchronized (lock) {
