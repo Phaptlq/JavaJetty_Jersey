@@ -1,1 +1,1 @@
-web: java -jar target/homework-1.0-SNAPSHOT.jar
+web: java -jar target/phaptlq-jar-with-dependencies.jar
