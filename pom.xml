@@ -42,7 +42,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>hello.Main</mainClass>
+                    <mainClass>App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
