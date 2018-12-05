@@ -3,7 +3,7 @@ import javax.servlet.*;
 import java.io.IOException;
 
 public class LimitFilter implements javax.servlet.Filter {
-    private int limit = 1;
+    private int limit = 5;
     private int count;
     private Object lock = new Object();
     @Override

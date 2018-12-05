@@ -32,10 +32,10 @@ public class App {
         filterHolder.setInitParameter("remotePort", "false");     // true = track connections by remote ip+port
         filterHolder.setInitParameter("enabled", "true");
         filterHolder.setInitParameter("trackSessions", "true");
-        context.addFilter( filterHolder, "/*", REQUEST_SCOPE );
+        //context.addFilter( filterHolder, "/*", REQUEST_SCOPE );
         servletHolder.setInitOrder(1);
         context.addServlet(servletHolder, "/*");
-        context.addFilter(LimitFilter.class,"/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
+        context.addFilter( LimitFilter.class, "/*", REQUEST_SCOPE );
         server.start();
         server.join();
 
