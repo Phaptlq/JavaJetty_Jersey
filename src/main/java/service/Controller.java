@@ -9,6 +9,12 @@ import java.util.List;
 @Path("/api")
 public class Controller {
     static List<NoteDTO> Notes = new ArrayList<NoteDTO>();
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response forFun() {
+        return Response.ok("You are here!!!!", MediaType.TEXT_PLAIN).build();
+    }
     //Create note /api/add
     @POST
     @Path("/add")
